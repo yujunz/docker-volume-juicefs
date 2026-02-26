@@ -114,12 +114,64 @@ func ceMount(v *jfsVolume) error {
 
 	// options left for `juicefs mount`
 	mount := exec.Command(ceCliPath, "mount")
+	// Boolean flags that should be passed as --flag (without =value)
 	mountFlags := []string{
+		// existing flags
 		"cache-partial-only",
 		"enable-xattr",
 		"no-syslog",
 		"no-usage-report",
 		"writeback",
+		// general options
+		"background",
+		"d",
+		"foreground",
+		"f",
+		"update-fstab",
+		"prefix-internal",
+		"hide-internal",
+		"sort-dir",
+		"no-update",
+		// FUSE options
+		"enable-acl",
+		"no-bsd-lock",
+		"no-posix-lock",
+		"readdir-cache",
+		"allow-other",
+		"allow-root",
+		// meta cache options
+		"open-cache",
+		"opencache",
+		// data options
+		"external",
+		"internal",
+		"flip",
+		// local data cache options
+		"cache-large-write",
+		// distributed data cache options
+		"group-backup",
+		"no-sharing",
+		"fill-group-cache",
+		"group-compress",
+		// WebDAV options
+		"gzip",
+		"disallow-list",
+		"disallowList",
+		// global options
+		"verbose",
+		"debug",
+		"v",
+		"quiet",
+		"q",
+		"trace",
+		"no-agent",
+		"no-color",
+		// CE-specific options
+		"no-bgjob",
+		"no-session",
+		"no-banner",
+		"read-only",
+		"ro",
 	}
 	for _, mountFlag := range mountFlags {
 		_, ok := options[mountFlag]
@@ -205,7 +257,9 @@ func eeMount(v *jfsVolume) error {
 
 	// options left for `juicefs mount`
 	mount := exec.Command(cliPath, "mount", v.Name, v.Mountpoint)
+	// Boolean flags that should be passed as --flag (without =value)
 	mountFlags := []string{
+		// existing flags
 		"external",
 		"internal",
 		"gc",
@@ -215,6 +269,48 @@ func eeMount(v *jfsVolume) error {
 		"allow-other",
 		"allow-root",
 		"enable-xattr",
+		// general options
+		"background",
+		"d",
+		"foreground",
+		"f",
+		"no-syslog",
+		"update-fstab",
+		"prefix-internal",
+		"hide-internal",
+		"sort-dir",
+		"no-update",
+		// FUSE options
+		"enable-acl",
+		"no-bsd-lock",
+		"no-posix-lock",
+		"readdir-cache",
+		// meta cache options
+		"open-cache",
+		"opencache",
+		// local data cache options
+		"writeback",
+		"cache-partial-only",
+		"cache-large-write",
+		// distributed data cache options
+		"group-backup",
+		"no-sharing",
+		"fill-group-cache",
+		"group-compress",
+		// WebDAV options
+		"gzip",
+		"disallow-list",
+		"disallowList",
+		// global options
+		"verbose",
+		"debug",
+		"v",
+		"quiet",
+		"q",
+		"trace",
+		"no-agent",
+		"no-color",
+		"no-usage-report",
 	}
 	for _, mountFlag := range mountFlags {
 		_, ok := options[mountFlag]
